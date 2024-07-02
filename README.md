@@ -13,38 +13,48 @@ npm install @your-package/custom-dropdown
 ```ts
 // Usage
 // Import CustomDropdown in your React component and use it with various configuration options:
-
-import React, { useState } from 'react';
-import CustomDropdown from '@your-package/custom-dropdown';
+// src/App.tsx
+import React from "react";
+import CustomDropdown from "./CustomDropdown";
 
 const options = [
-  { value: 'option1', label: 'Option 1' },
-  { value: 'option2', label: 'Option 2' },
-  // Add more options as needed
+  { value: "option1", label: "Option 1" },
+  { value: "option2", label: "Option 2" },
+  { value: "option3", label: "Option 3" },
+  { value: "option4", label: "Option 4" },
+  { value: "option5", label: "Option 5" },
+  { value: "option6", label: "Option 6" },
+  { value: "option7", label: "Option 7" },
+  { value: "option8", label: "Option 8" },
 ];
 
-const App = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  const handleOptionChange = (option) => {
-    setSelectedOption(option);
-    // Handle option change logic here
+const App: React.FC = () => {
+  const handleOptionChange = (selected: any) => {
+    console.log("Selected options:", selected);
   };
 
+  const customOptionRenderer = (option: any) => (
+    <div style={{ color: "blue" }}>{option.label}</div>
+  );
+
   return (
-    <div>
-      <h1>CustomDropdown Example</h1>
+    <>
       <CustomDropdown
         options={options}
+        isMulti={true}
+        isSearchable={true}
+        usePortal={true}
+        zIndex={1001}
+        placeholder="Select an option"
+        customOptionRenderer={customOptionRenderer}
         onOptionChange={handleOptionChange}
-        placeholder="Select an option..."
       />
-      <p>Selected option: {selectedOption ? selectedOption.label : 'None'}</p>
-    </div>
+    </>
   );
 };
 
 export default App;
+
 ```
 
 ## Props
